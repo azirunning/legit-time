@@ -13,35 +13,23 @@ local CurrentCamera = Workspace.CurrentCamera
 local Mouse = LocalPlayer:GetMouse()
 
 -- // Silent Aim Vars
-getgenv().Aiming = {
-    Enabled = true,
-
+getgenv().ValiantAimHacks = {
+    SilentAimEnabled = true,
     ShowFOV = false,
-    FOV = 9,
-    FOVSides = 300,
-    FOVColour = Color3fromRGB(255, 255, 255),
-
     VisibleCheck = true,
-    
+    TeamCheck = true,
+    FOV = 12,
     HitChance = 100,
-
-    Selected = nil,
-    SelectedPart = nil,
-
-    TargetPart = {"Head", "HumanoidRootPart"},
-
-    Ignored = {
-        Teams = {
-            {
-                Team = LocalPlayer.Team,
-                TeamColor = LocalPlayer.TeamColor,
-            },
+    Selected = LocalPlayer,
+    TargetPart = "Head", "HumanoidRootPart",
+    BlacklistedTeams = {
+        {
+            Team = LocalPlayer.Team,
+            TeamColor = LocalPlayer.TeamColor,
         },
-        Players = {
-            LocalPlayer,
-            91318356
-        }
-    }
+    },
+    BlacklistedPlayers = {LocalPlayer},
+    WhitelistedPUIDs = {69924376},
 }
 
 -- // Show FOV
@@ -55,7 +43,7 @@ function ValiantAimHacks.updateCircle()
     if (circle) then
         -- // Set Circle Properties
         circle.Visible = ValiantAimHacks.ShowFOV
-        circle.Radius = (ValiantAimHacks.FOV * 2)
+        circle.Radius = (ValiantAimHacks.FOV * 3)
         circle.Position = Vector2.new(Mouse.X, Mouse.Y + GuiService:GetGuiInset().Y)
 
         -- // Return circle
